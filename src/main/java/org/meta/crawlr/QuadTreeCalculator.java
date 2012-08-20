@@ -37,6 +37,9 @@ public class QuadTreeCalculator {
     // Run program for the following tags:
     private static String[] tags = new String[]{"New York", "Times Square"};
 
+    /**
+     * the constructor
+     */
     public QuadTreeCalculator() throws ParserConfigurationException, IOException {
         Properties properties;
         InputStream in = null;

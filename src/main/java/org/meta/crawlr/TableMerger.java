@@ -70,15 +70,6 @@ public class TableMerger {
 
         System.out.println("start program");
         
-        Date userFirstPhoto1 = new Date(Date.parse("5 Nov 2007 22:02:01 GMT")); // 24;
-        if (userFirstPhoto1.before(new Date(108, 0, 1))) {
-            System.out.println("experienced user");
-        }
-        else {
-            System.out.println("une");
-        }
-
-        
         //for (excludeThreshold = 2000; excludeThreshold <= 2000; excludeThreshold = excludeThreshold + 2000) {
         
             //// ------------------------ prepare output file writer:
