@@ -36,8 +36,6 @@ import com.csvreader.CsvWriter;
  */
 public class PhotoInfoDownloader {
 
-    static String apiKey;
-    static String sharedSecret;
     Flickr f;
     REST rest;
     RequestContext requestContext;
