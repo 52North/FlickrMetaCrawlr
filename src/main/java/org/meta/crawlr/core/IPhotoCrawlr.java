@@ -2,7 +2,9 @@ package org.meta.crawlr.core;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
+import org.meta.crawlr.entities.FlickrPhoto;
 import org.xml.sax.SAXException;
 
 import com.aetrion.flickr.FlickrException;
@@ -12,7 +14,7 @@ import com.aetrion.flickr.FlickrException;
  */
 public interface IPhotoCrawlr {
 
-	public String crawlForPhotos(
+	public List<FlickrPhoto> crawlForPhotos(
 			String minLongitude, String minLatitude, String maxLongitude, String maxLatitude,
 			Date minTakenDate, Date maxTakenDate,
 			String[] keywords)

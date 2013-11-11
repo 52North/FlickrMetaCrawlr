@@ -5,13 +5,13 @@
 	<groupId>org.meta.crawlr</groupId>
 	<artifactId>flickrMetaCrawlr</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>flickrMetaCrawlr</name>
-	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<junit.version>4.11</junit.version>
 		<logback-version>1.0.11</logback-version>
 		<morphia-version>1.2.3</morphia-version>
 		<jersey-version>1.17.1</jersey-version>
@@ -35,13 +35,16 @@
 	</build>
 
 	<dependencies>
+	    
+	    <!-- UNIT TESTING -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 
+		<!-- LOGGING -->
 		<dependency>
 			<artifactId>slf4j-api</artifactId>
 			<groupId>org.slf4j</groupId>
@@ -71,7 +74,66 @@
 			<version>${logback-version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		
+		<!-- DEPENDENCY INJECTION -->
+		<dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${guice-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-servlet</artifactId>
+            <version>${guice-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-assistedinject</artifactId>
+            <version>${guice-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-multibindings</artifactId>
+            <version>${guice-version}</version>
+        </dependency>
 
+        <!-- WEB ENABLEMENT -->
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>${jersey-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-guice</artifactId>
+            <version>${jersey-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jersey-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>7.6.10.v20130312</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>javax.servlet</artifactId>
+                    <groupId>org.eclipse.jetty.orbit</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+        
+		<!-- GEO STUFF -->
 		<dependency>
 			<groupId>org.geotools</groupId>
 			<artifactId>gt-referencing</artifactId>
@@ -87,22 +149,56 @@
 			<artifactId>gt-epsg-hsql</artifactId>
 			<version>${geotools.version}</version>
 		</dependency>
+		
+		<!-- DIAGRAM RENDERING -->
 		<dependency>
 			<groupId>jfree</groupId>
 			<artifactId>jfreechart</artifactId>
 			<version>1.0.13</version>
 		</dependency>
+		
+		<!-- FLICKR ACCESS -->
 		<dependency>
 			<groupId>com.aetrion.flickr</groupId>
 			<artifactId>flickrapi</artifactId>
 			<version>1.2</version>
 		</dependency>
 
+		<!-- 52n SWE STUFF -->
+		<dependency>
+			<groupId>org.n52.sensorweb</groupId>
+			<artifactId>oxf-sos-adapter</artifactId>
+			<version>2.0.1-alpha.2-SNAPSHOT</version>
+		</dependency>
+		
 	</dependencies>
 
 
 	<repositories>
 
+	    <repository>
+			 <id>n52-releases</id>
+			 <name>52n Releases</name>
+			 <url>http://52north.org/maven/repo/releases/</url>
+			 <releases>
+				<enabled>true</enabled>
+			 </releases>
+			 <snapshots>
+				<enabled>false</enabled>
+			 </snapshots>
+		  </repository>
+		  <repository>
+			 <id>n52-snapshots</id>
+			 <name>52n Snapshots</name>
+			 <url>http://52north.org/maven/repo/snapshots/</url>
+			 <releases>
+				<enabled>false</enabled>
+			 </releases>
+			 <snapshots>
+				<enabled>true</enabled>
+			 </snapshots>
+		  </repository>
+		  
 		<repository>
 			<id>central</id>
 			<name>Maven Repository Switchboard</name>
@@ -132,5 +228,5 @@
 		</repository>
 
 	</repositories>
-
+ 
 </project>
