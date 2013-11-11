@@ -1,27 +1,51 @@
 package org.meta.crawlr.core;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
+import org.meta.crawlr.entities.FlickrPhoto;
 
 public class PhotoCrawlrImplTest {
 
 	@Test
 	public void testCrawlForPhotos() {
+
+		// long/lat of Monterrey Bay:
+		double targetLongitude = -121.901481;
+		double targetLatitude = 36.618253;
+
+		double minLongitude = targetLongitude - 20;
+		double minLatitude = targetLatitude - 20;
+		double maxLongitude = targetLongitude + 20;
+		double maxLatitude = targetLatitude + 20;
+
+		Date maxTakenDate = new Date(System.currentTimeMillis());
+		Date minTakenDate = calculateDateXWeeksAgo(50);
+
+		String[] keywords = new String[] { "Oil" };
+
+		try {
+			List<FlickrPhoto> photos = new PhotoCrawlrImpl()
+					.crawlForPhotos(minLongitude, minLatitude, maxLongitude,
+							maxLatitude, minTakenDate, maxTakenDate, keywords);
+			
+			for (FlickrPhoto flickrPhoto : photos) {
+				System.out.println(flickrPhoto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		} 
 		
-		String minLongitude;
-		String minLatitude;
-		String maxLongitude;
-		String maxLatitude;
+	}
+
+	private Date calculateDateXWeeksAgo(int weeksAgo) {
 		
-		final Calendar now = GregorianCalendar.getInstance(); //(System.currentTimeMillis());
-		Date maxTakenDate = now.getTime();
-		now.roll(Calendar.DAY_OF_MONTH, -31);
-		Date minTakenDate = now.getTime();
+		long milliSecondsOfAWeek = 1000 * 60 * 60 * 24 * 7;
 		
-		String[] keywords = new String[] {"Beach"};
+		return new Date(System.currentTimeMillis() - (weeksAgo * milliSecondsOfAWeek));
 	}
 
 }

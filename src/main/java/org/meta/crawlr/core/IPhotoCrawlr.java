@@ -15,7 +15,7 @@ import com.aetrion.flickr.FlickrException;
 public interface IPhotoCrawlr {
 
 	public List<FlickrPhoto> crawlForPhotos(
-			String minLongitude, String minLatitude, String maxLongitude, String maxLatitude,
+			double minLongitude, double minLatitude, double maxLongitude, double maxLatitude,
 			Date minTakenDate, Date maxTakenDate,
 			String[] keywords)
 					throws IOException, SAXException, FlickrException;

@@ -2,10 +2,13 @@ package org.meta.crawlr.core;
 
 import java.util.List;
 
-import org.meta.crawlr.entities.*;
+import org.meta.crawlr.entities.FlickrPhoto;
 import org.n52.oxf.OXFException;
 import org.n52.oxf.ows.ExceptionReport;
 import org.n52.oxf.sos.adapter.wrapper.SOSWrapper;
+import org.n52.oxf.sos.adapter.wrapper.builder.InsertObservationParameterBuilder_v100;
+import org.n52.oxf.sos.request.observation.MeasurementObservationParameters;
+import org.n52.oxf.sos.request.observation.ObservationParameters;
 
 public class SosUploadrImpl {
 
@@ -24,18 +27,11 @@ public class SosUploadrImpl {
 			photo.getPhotoLongitude();	// --> foi.longitude
 			photo.getUserId();			// --> procedure
 
-			photo.getPhotoTitle();		// --> 
-			photo.getPhotoTags();		// --> 
+			photo.getPhotoTitle();		// --> ???
+			photo.getPhotoTags();		// --> ???
 			
 										// --> observedProperty
-						
-			SOSWrapper sos = SOSWrapper.createFromCapabilities(SOS_URL, SOS_VERSION);
-			
-//			ObservationParameters obsParams = new MeasurementObservationParameters();
-//			obsParams.addFoiDescription(foiDescription);
-//			
-//			InsertObservationParameterBuilder_v100 builder = new InsertObservationParameterBuilder_v100(assignedSensorId, obsParameter);
-//			sos.doInsertObservation(builder);
+				
 		}
 	}
 	

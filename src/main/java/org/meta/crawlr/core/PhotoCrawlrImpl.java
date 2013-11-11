@@ -82,7 +82,7 @@ public class PhotoCrawlrImpl implements IPhotoCrawlr {
 
 	@Override
 	public List<FlickrPhoto> crawlForPhotos(
-			String minLongitude, String minLatitude, String maxLongitude, String maxLatitude,
+			double minLongitude, double minLatitude, double maxLongitude, double maxLatitude,
 			Date minTakenDate, Date maxTakenDate,
 			String[] keywords) throws IOException, SAXException, FlickrException {
 
@@ -94,7 +94,7 @@ public class PhotoCrawlrImpl implements IPhotoCrawlr {
 		params.setTags(keywords);
 		params.setTagMode("all");
 		params.setHasGeo(true);
-		params.setBBox(minLongitude, minLatitude, maxLongitude, maxLatitude);
+		params.setBBox(""+minLongitude, ""+minLatitude, ""+maxLongitude, ""+maxLatitude);
 		params.setMinTakenDate(minTakenDate);
 		params.setMaxTakenDate(maxTakenDate);
 
@@ -111,7 +111,10 @@ public class PhotoCrawlrImpl implements IPhotoCrawlr {
 			for (int i = 0; i < photoList.size(); i++) {
 				Photo photo = (Photo) photoList.get(i);
 				
-				flickrPhotos.add(createFlickrPhoto(photo));
+				FlickrPhoto flickrPhoto = createFlickrPhoto(photo);
+				log.info("Downloaded photo No. " + i + ".): " + flickrPhoto);
+				
+				flickrPhotos.add(flickrPhoto);
 			}
 
 			pageIndex++;
@@ -159,8 +162,8 @@ public class PhotoCrawlrImpl implements IPhotoCrawlr {
         
         // user:
         User user = photoInfo.getOwner();
-        String userId = user.getId();
-        flickrPhoto.setUserId(userId); 
+        flickrPhoto.setUserId(user.getId());
+        flickrPhoto.setUserName(user.getUsername());
         
 		return flickrPhoto;
 	}
