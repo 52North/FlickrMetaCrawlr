@@ -20,25 +20,36 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-
-import com.google.inject.Inject;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/")
 public class PhotoCrawlrResource  {
-    public static final String SENSOR = "sensor";
     
-    @Inject
     public PhotoCrawlrResource() {
     }
 
     @GET
-    @Produces({ MediaTypes.XML_RDF})
-    public String doStuff() {
-        return "hello";
-    }
+	@Path("/search")
+    @Produces(MediaType.TEXT_PLAIN)
+	public Response doSearch(
+			@QueryParam("param") String msg,
+			@QueryParam("param2") String msg2)
+    {
+    	
+		String output = "Jersey say : " + msg + " - " + msg2;
+ 
+		return Response.status(200).entity(output).build();
+	}
 
-    @PathParam(SENSOR)
-    public String sensor() {
-        return "sensors";
+    @PathParam("search")
+    public String search() {
+        return "go ahead and search";
+    }
+    
+    @Path("photo")
+    public String photo() {
+        return "photo";
     }
 }

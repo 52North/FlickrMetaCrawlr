@@ -18,6 +18,12 @@ package org.meta.crawlr.server;
 
 import java.util.ServiceLoader;
 
+import org.meta.crawlr.core.PhotoCrawlrImpl;
+import org.meta.crawlr.guice.JerseyModule;
+import org.meta.crawlr.guice.JerseyResourceModule;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
 
@@ -27,10 +33,19 @@ import com.google.inject.Module;
  * @author Christian Autermann <autermann@uni-muenster.de>
  */
 public class ServiceLoaderConfigurationModule extends AbstractModule {
-    @Override
+    
+	private static final Logger log = LoggerFactory.getLogger(ServiceLoaderConfigurationModule.class);
+	
+	@Override
     protected void configure() {
-        for (Module m : ServiceLoader.load(Module.class)) {
-            install(m);
-        }
+		
+//		install(new JerseyModule());
+//		install(new JerseyResourceModule());
+		
+//        for (Module m : ServiceLoader.load(Module.class)) {
+//        	log.info("Installing module: " + m);
+//        	System.out.println("Installing module: " + m);
+//            install(m);
+//        }
     }
 }

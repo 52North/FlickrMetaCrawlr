@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.meta.crawlr.entities.FlickrPhoto;
 
-public class PhotoCrawlrImplTest {
+public class PhotoCrawlrImplIT {
 
 	@Test
 	public void testCrawlForPhotos() {

@@ -37,8 +37,7 @@ public class ServletContextListener extends GuiceServletContextListener {
     @Override
     protected Injector getInjector() {
         if (injector == null) {
-            injector = Guice
-                    .createInjector(new ServiceLoaderConfigurationModule());
+            injector = Guice.createInjector(new ServiceLoaderConfigurationModule());
             configureLogging();
         }
         return injector;

@@ -19,6 +19,7 @@ package org.meta.crawlr.guice;
 import org.meta.crawlr.server.PhotoCrawlrResource;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Scopes;
 
 /**
  * TODO JavaDoc
@@ -30,7 +31,7 @@ public class JerseyResourceModule extends AbstractModule {
     @Override
     protected void configure() {
         
-        bind(PhotoCrawlrResource.class);
+        bind(PhotoCrawlrResource.class).in(Scopes.SINGLETON);
     }
 
 }
