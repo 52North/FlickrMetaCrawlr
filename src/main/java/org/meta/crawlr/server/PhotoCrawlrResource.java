@@ -34,22 +34,19 @@ public class PhotoCrawlrResource  {
 	@Path("/search")
     @Produces(MediaType.TEXT_PLAIN)
 	public Response doSearch(
-			@QueryParam("param") String msg,
-			@QueryParam("param2") String msg2)
+			@QueryParam("keywords") String keywords,
+			@QueryParam("bbox") BoundingBoxParam bbox,
+			@QueryParam("minTime") TimeParam minTime,
+			@QueryParam("maxTime") TimeParam maxTime)
     {
     	
-		String output = "Jersey say : " + msg + " - " + msg2;
- 
+    	
+    	
+    	
+    	
+		String output = "";
+		
 		return Response.status(200).entity(output).build();
 	}
 
-    @PathParam("search")
-    public String search() {
-        return "go ahead and search";
-    }
-    
-    @Path("photo")
-    public String photo() {
-        return "photo";
-    }
 }

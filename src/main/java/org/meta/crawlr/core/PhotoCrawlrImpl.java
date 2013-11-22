@@ -111,6 +111,7 @@ public class PhotoCrawlrImpl implements IPhotoCrawlr {
 			for (int i = 0; i < photoList.size(); i++) {
 				Photo photo = (Photo) photoList.get(i);
 				
+				// careful, this call takes long:
 				FlickrPhoto flickrPhoto = createFlickrPhoto(photo);
 				log.info("Downloaded photo No. " + i + ".): " + flickrPhoto);
 				
