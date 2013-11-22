@@ -143,28 +143,28 @@ public class PhotoCrawlrImpl implements IPhotoCrawlr {
         flickrPhoto.setPhotoTitle(photoInfo.getTitle());
         flickrPhoto.setPhotoURL(photoInfo.getUrl());
         flickrPhoto.setPhotoDescription(photoInfo.getDescription());
-        flickrPhoto.setPhotoTags(photoInfo.getTags());
-        flickrPhoto.setPhotoDescription(photoInfo.getDescription());
-        
-        if (photoInfo.getDatePosted() != null) {
-            flickrPhoto.setPhotoDatePosted(photoInfo.getDatePosted());
-        }
-        if (photoInfo.getDateTaken() != null) {
-            flickrPhoto.setPhotoDateTaken(photoInfo.getDateTaken());
-        }
-        
-        // geo:
-        GeoData photoGeo = geoInterface.getLocation(photoID);
-        if (photoGeo != null) {
-            flickrPhoto.setPhotoLongitude(photoGeo.getLongitude());
-            flickrPhoto.setPhotoLongitude(photoGeo.getLatitude());
-            flickrPhoto.setAccuracy(photoGeo.getAccuracy());
-        }
-        
-        // user:
-        User user = photoInfo.getOwner();
-        flickrPhoto.setUserId(user.getId());
-        flickrPhoto.setUserName(user.getUsername());
+//        flickrPhoto.setPhotoTags(photoInfo.getTags());
+//        flickrPhoto.setPhotoDescription(photoInfo.getDescription());
+//        
+//        if (photoInfo.getDatePosted() != null) {
+//            flickrPhoto.setPhotoDatePosted(photoInfo.getDatePosted());
+//        }
+//        if (photoInfo.getDateTaken() != null) {
+//            flickrPhoto.setPhotoDateTaken(photoInfo.getDateTaken());
+//        }
+//        
+//        // geo:
+//        GeoData photoGeo = geoInterface.getLocation(photoID);
+//        if (photoGeo != null) {
+//            flickrPhoto.setPhotoLongitude(photoGeo.getLongitude());
+//            flickrPhoto.setPhotoLongitude(photoGeo.getLatitude());
+//            flickrPhoto.setAccuracy(photoGeo.getAccuracy());
+//        }
+//        
+//        // user:
+//        User user = photoInfo.getOwner();
+//        flickrPhoto.setUserId(user.getId());
+//        flickrPhoto.setUserName(user.getUsername());
         
 		return flickrPhoto;
 	}

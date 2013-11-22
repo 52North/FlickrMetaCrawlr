@@ -1,4 +1,4 @@
-package org.meta.crawlr.server;
+package org.meta.crawlr.server.params;
 
 /**
  * Class represents a bounding box parameter used in the search query.

@@ -16,14 +16,31 @@
  */
 package org.meta.crawlr.server;
 
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.meta.crawlr.core.PhotoCrawlrImpl;
+import org.meta.crawlr.entities.FlickrPhoto;
+import org.meta.crawlr.server.params.BoundingBoxParam;
+import org.meta.crawlr.server.params.TimeParam;
+import org.xml.sax.SAXException;
+
+import com.aetrion.flickr.FlickrException;
+
+/**
+ * http://localhost:8080/flickrMetaCrawlr/search?keywords=Monterrey,Airport&bbox=123,456,789,135&minTime=2008-12-01&maxTime=2009-12-31
+ * @author Arne
+ *
+ */
 @Path("/")
 public class PhotoCrawlrResource  {
     
@@ -37,16 +54,23 @@ public class PhotoCrawlrResource  {
 			@QueryParam("keywords") String keywords,
 			@QueryParam("bbox") BoundingBoxParam bbox,
 			@QueryParam("minTime") TimeParam minTime,
-			@QueryParam("maxTime") TimeParam maxTime)
+			@QueryParam("maxTime") TimeParam maxTime) throws IOException, SAXException, FlickrException, ParserConfigurationException
     {
+    	double minLongitude = bbox.getMinLongitude();
+    	double minLatitude = bbox.getMinLatitude();
+    	double maxLongitude = bbox.getMaxLongitude();
+    	double maxLatitude = bbox.getMaxLatitude();
     	
+    	Date minTakenDate = minTime.getTime().getCalendar().getTime();
+    	Date maxTakenDate = maxTime.getTime().getCalendar().getTime();
     	
-    	
-    	
-    	
-		String output = "";
+		List<FlickrPhoto> photoList = new PhotoCrawlrImpl().crawlForPhotos(minLongitude, minLatitude, maxLongitude, maxLatitude, minTakenDate, maxTakenDate, keywords.split(","));
 		
+		String output = "";
+		for (FlickrPhoto flickrPhoto : photoList) {
+			output += flickrPhoto + "<br>";
+		}
 		return Response.status(200).entity(output).build();
+    	
 	}
-
 }

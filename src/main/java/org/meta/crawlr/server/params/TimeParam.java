@@ -1,6 +1,7 @@
-package org.meta.crawlr.server;
+package org.meta.crawlr.server.params;
 
 import org.n52.oxf.ows.capabilities.ITime;
+import org.n52.oxf.valueDomains.time.ITimePosition;
 import org.n52.oxf.valueDomains.time.TimeFactory;
 import org.n52.oxf.valueDomains.time.TimePosition;
 
@@ -11,7 +12,7 @@ import org.n52.oxf.valueDomains.time.TimePosition;
  */
 public class TimeParam {
 
-	private ITime time;
+	private ITimePosition time;
 	
 	/**
 	 * @param param ISO 8601 compliant String.   
@@ -20,7 +21,7 @@ public class TimeParam {
 		time = (TimePosition) TimeFactory.createTime(param);
 	}
 	
-	public ITime getTime() {
+	public ITimePosition getTime() {
 		return time;
 	}
 	
