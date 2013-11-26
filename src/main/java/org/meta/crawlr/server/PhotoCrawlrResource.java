@@ -49,7 +49,7 @@ public class PhotoCrawlrResource  {
 
     @GET
 	@Path("/search")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_HTML)
 	public Response doSearch(
 			@QueryParam("keywords") String keywords,
 			@QueryParam("bbox") BoundingBoxParam bbox,
