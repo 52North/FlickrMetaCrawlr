@@ -37,7 +37,17 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<configuration>
+					<url>http://ags.dev.52north.org:8080/manager/text</url>
+					<server>Tomcat_On_AGS</server>
+					<path>/${project.name}</path>
+				</configuration>
+			</plugin>
 		</plugins>
+
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -49,8 +59,8 @@
 	</build>
 
 	<dependencies>
-	    
-	    <!-- UNIT TESTING -->
+
+		<!-- UNIT TESTING -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -87,31 +97,31 @@
 			<version>${logback-version}</version>
 			<scope>runtime</scope>
 		</dependency>
-		
-        <!-- WEB ENABLEMENT -->
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-server</artifactId>
-            <version>${jersey-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jersey.contribs</groupId>
-            <artifactId>jersey-guice</artifactId>
-            <version>${jersey-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>${jersey-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
-        </dependency>
-        
+
+		<!-- WEB ENABLEMENT -->
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>${jersey-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-guice</artifactId>
+			<version>${jersey-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>${jersey-version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- GEO STUFF -->
 		<dependency>
 			<groupId>org.geotools</groupId>
@@ -128,14 +138,14 @@
 			<artifactId>gt-epsg-hsql</artifactId>
 			<version>${geotools.version}</version>
 		</dependency>
-		
+
 		<!-- DIAGRAM RENDERING -->
 		<dependency>
 			<groupId>jfree</groupId>
 			<artifactId>jfreechart</artifactId>
 			<version>1.0.13</version>
 		</dependency>
-		
+
 		<!-- FLICKR ACCESS -->
 		<dependency>
 			<groupId>com.aetrion.flickr</groupId>
@@ -149,36 +159,36 @@
 			<artifactId>oxf-sos-adapter</artifactId>
 			<version>2.0.0-alpha.4-SNAPSHOT</version>
 		</dependency>
-		
+
 		<!-- WEB SOCKETS -->
 		<dependency>
-              <groupId>org.atmosphere</groupId>
-              <artifactId>atmosphere-runtime</artifactId>
-              <version>2.1.0-beta1</version>
-        </dependency>
-        <dependency>
+			<groupId>org.atmosphere</groupId>
+			<artifactId>atmosphere-runtime</artifactId>
+			<version>2.1.0-beta1</version>
+		</dependency>
+		<dependency>
 			<groupId>org.atmosphere</groupId>
 			<artifactId>atmosphere-jersey</artifactId>
 			<version>2.1.0-beta1</version>
 		</dependency>
-		            
-	</dependencies> 
+
+	</dependencies>
 
 
 	<repositories>
 
-	  	 <repository>
-			 <id>n52-snapshots</id>
-			 <name>52n Snapshots</name>
-			 <url>http://52north.org/maven/repo/snapshots/</url>
-			 <releases>
+		<repository>
+			<id>n52-snapshots</id>
+			<name>52n Snapshots</name>
+			<url>http://52north.org/maven/repo/snapshots/</url>
+			<releases>
 				<enabled>false</enabled>
-			 </releases>
-			 <snapshots>
+			</releases>
+			<snapshots>
 				<enabled>true</enabled>
-			 </snapshots>
-		  </repository>
-		  
+			</snapshots>
+		</repository>
+
 		<repository>
 			<id>central</id>
 			<name>Maven Repository Switchboard</name>
@@ -208,5 +218,5 @@
 		</repository>
 
 	</repositories>
- 
+
 </project>

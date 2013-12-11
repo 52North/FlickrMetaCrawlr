@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.meta.crawlr.entities.FlickrPhoto;
 
 
-public class SosUploadrImplTest {
+public class SosUploadrImplIT {
 
 	@Test
 	public void testUploadPhotos() {

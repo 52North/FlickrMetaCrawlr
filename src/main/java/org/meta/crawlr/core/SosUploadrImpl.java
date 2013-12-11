@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +20,8 @@ import org.n52.oxf.util.IOHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aetrion.flickr.tags.Tag;
+
 public class SosUploadrImpl {
 
 	private static final Logger log = LoggerFactory.getLogger(SosUploadrImpl.class);
@@ -28,6 +29,7 @@ public class SosUploadrImpl {
 	private static final String SOS_URL = "http://ows.dev.52north.org:8080/52n-wfs-webapp/sos/soap"; 
 	private static final String SOS_VERSION = "2.0.0";
 	private static final String INSERT_OBS_TEMPLATE = "InsertObservationTemplate.xml";
+	private static final String INSERT_SENSOR_TEMPLATE = "InsertSensorTemplate.xml";
 	
 	private static final String OFFERING_ID = "@OFFERING-ID@";
 	private static final String OBSERVATION_GML_ID = "@OBSERVATION_GML_ID@";
@@ -43,8 +45,19 @@ public class SosUploadrImpl {
 	private static final String FOI_LATITUDE = "@FOI_LATITUDE@";
 	private static final String RESULT = "@RESULT@";
 	
-	
-	
+	/**
+	 * Calls InsertSensor to register Flickr as a procedure.
+	 *  
+	 * @throws IOException
+	 */
+	public void registerProcedure() throws IOException {
+		StringBuilder insertSensorTemplate = new StringBuilder(IOHelper.readText(SosUploadrImpl.class.getResourceAsStream(INSERT_SENSOR_TEMPLATE)));
+
+		// now send to SOS:
+		log.info("sending InsertSensor to SOS: " + insertSensorTemplate.toString());
+		String response = IOHelper.readText(sendPostMessage(SOS_URL, insertSensorTemplate.toString()));
+		log.info(response);
+	}
 	
 	public void uploadPhotos (List<FlickrPhoto> photoList) throws ExceptionReport, OXFException, IOException {
 				
@@ -53,21 +66,21 @@ public class SosUploadrImpl {
 		final String procedureID 	  = "http://www.52north.org/sos/procedure/flickr";
 		final String observedProperty = "http://www.52north.org/sos/observableProperty/photo";
 		
-		StringBuilder insertObservationTemplate = new StringBuilder(IOHelper.readText(SosUploadrImpl.class.getResourceAsStream(INSERT_OBS_TEMPLATE)));
-
 		for (FlickrPhoto photo : photoList) {
+			
+			StringBuilder insertObservationTemplate = new StringBuilder(IOHelper.readText(SosUploadrImpl.class.getResourceAsStream(INSERT_OBS_TEMPLATE)));
 			
 			String photoId = "photo-" + photo.getPhotoID();
 			String result = photo.getPhotoURL();
 			Date resultTime = photo.getPhotoDatePosted();
 			Date samplingTime = photo.getPhotoDateTaken();
-			Float latitude = photo.getPhotoLatitude();
 			Float longitude = photo.getPhotoLongitude();
+			Float latitude = photo.getPhotoLatitude();
 			String foiName = photo.getPhotoTitle();
 			String foiDescription = concat(photo.getPhotoTags());
 			String userID = photo.getUserId();
 			
-			replace(insertObservationTemplate, OBSERVATION_GML_ID, photoId);
+			replace(insertObservationTemplate, OBSERVATION_GML_ID, photoId + "-observation");
 			replace(insertObservationTemplate, OFFERING_ID, offeringID);
 			replace(insertObservationTemplate, PROCEDURE_ID, procedureID);
 			replace(insertObservationTemplate, OBSERVED_PROPERTY, observedProperty);
@@ -80,7 +93,7 @@ public class SosUploadrImpl {
 			String samplingTimeAsISO = df.format(samplingTime);
 			replace(insertObservationTemplate, PHENOMENON_TIME, samplingTimeAsISO);
 			
-			replace(insertObservationTemplate, FOI_ID, "foi-ID");
+			replace(insertObservationTemplate, FOI_ID, photoId + "-feature");
 			replace(insertObservationTemplate, FOI_DESCRIPTION, foiDescription);
 			replace(insertObservationTemplate, FOI_LATITUDE, latitude.toString());
 			replace(insertObservationTemplate, FOI_LONGITUDE, longitude.toString());
@@ -91,7 +104,7 @@ public class SosUploadrImpl {
 			
 			
 			// now send to SOS:
-			log.info("Uploading to SOS: " + insertObservationTemplate.toString());
+			log.info("sensing InsertObservation to SOS: " + insertObservationTemplate.toString());
 			
 			String response = IOHelper.readText(sendPostMessage(SOS_URL, insertObservationTemplate.toString()));
 			
@@ -110,10 +123,22 @@ public class SosUploadrImpl {
 			array = collection.toArray(array);
 			
 			if (array.length >= 1) {
-				result += array[0].toString();
+				if (array[0] instanceof Tag) {
+					Tag tag = (Tag) array[0];
+					result += tag.getValue();
+				}
+				else {
+					result += array[0].toString();
+				}
 			}
 			for (int i=1; i<array.length; i++) {
-				result += ", " + array[i].toString();
+				if (array[0] instanceof Tag) {
+					Tag tag = (Tag) array[i];
+					result +=  ", " + tag.getValue();
+				}
+				else {
+					result += ", " + array[i].toString();
+				}
 			}
 		}
 		return result;

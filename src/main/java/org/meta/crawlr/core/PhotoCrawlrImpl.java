@@ -157,7 +157,7 @@ public class PhotoCrawlrImpl implements IPhotoCrawlr {
         GeoData photoGeo = geoInterface.getLocation(photoID);
         if (photoGeo != null) {
             flickrPhoto.setPhotoLongitude(photoGeo.getLongitude());
-            flickrPhoto.setPhotoLongitude(photoGeo.getLatitude());
+            flickrPhoto.setPhotoLatitude(photoGeo.getLatitude());
             flickrPhoto.setAccuracy(photoGeo.getAccuracy());
         }
         

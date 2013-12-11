@@ -8,7 +8,7 @@ import org.n52.oxf.valueDomains.time.TimePosition;
 /**
  * Class represents a time parameter used in the search query.
  * 
- * @author Arne
+ * @author <a href="mailto:broering@52north.org>Arne Broering</a>
  */
 public class TimeParam {
 

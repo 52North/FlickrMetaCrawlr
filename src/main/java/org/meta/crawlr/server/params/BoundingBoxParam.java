@@ -3,7 +3,7 @@ package org.meta.crawlr.server.params;
 /**
  * Class represents a bounding box parameter used in the search query.
  * 
- * @author Arne
+ * @author <a href="mailto:broering@52north.org>Arne Broering</a>
  */
 public class BoundingBoxParam {
 
