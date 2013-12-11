@@ -1,4 +1,4 @@
-package org.meta.crawlr.server.params;
+package org.n52.flickr.crawlr.server.params;
 
 import org.n52.oxf.ows.capabilities.ITime;
 import org.n52.oxf.valueDomains.time.ITimePosition;

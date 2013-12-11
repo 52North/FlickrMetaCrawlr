@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.meta.crawlr.server.error;
+package org.n52.flickr.crawlr.server.error;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

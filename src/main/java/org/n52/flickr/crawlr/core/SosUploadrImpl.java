@@ -1,4 +1,4 @@
-package org.meta.crawlr.core;
+package org.n52.flickr.crawlr.core;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +13,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.meta.crawlr.entities.FlickrPhoto;
+import org.n52.flickr.crawlr.entities.FlickrPhoto;
 import org.n52.oxf.OXFException;
 import org.n52.oxf.ows.ExceptionReport;
 import org.n52.oxf.util.IOHelper;

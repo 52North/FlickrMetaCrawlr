@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.meta.crawlr.server;
+package org.n52.flickr.crawlr.server;
 
 import java.io.IOException;
 import java.util.Date;
@@ -28,12 +28,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.meta.crawlr.core.PhotoCrawlrImpl;
-import org.meta.crawlr.core.SosUploadrImpl;
-import org.meta.crawlr.entities.FlickrPhoto;
-import org.meta.crawlr.server.error.MissingParameterException;
-import org.meta.crawlr.server.params.BoundingBoxParam;
-import org.meta.crawlr.server.params.TimeParam;
+import org.n52.flickr.crawlr.core.PhotoCrawlrImpl;
+import org.n52.flickr.crawlr.core.SosUploadrImpl;
+import org.n52.flickr.crawlr.entities.FlickrPhoto;
+import org.n52.flickr.crawlr.server.error.MissingParameterException;
+import org.n52.flickr.crawlr.server.params.BoundingBoxParam;
+import org.n52.flickr.crawlr.server.params.TimeParam;
 import org.n52.oxf.OXFException;
 import org.n52.oxf.ows.ExceptionReport;
 import org.xml.sax.SAXException;

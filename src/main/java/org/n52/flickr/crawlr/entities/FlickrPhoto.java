@@ -1,4 +1,4 @@
-package org.meta.crawlr.entities;
+package org.n52.flickr.crawlr.entities;
 
 import java.util.Collection;
 import java.util.Date;

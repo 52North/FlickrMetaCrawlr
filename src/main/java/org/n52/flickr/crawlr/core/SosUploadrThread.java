@@ -1,9 +1,9 @@
-package org.meta.crawlr.core;
+package org.n52.flickr.crawlr.core;
 
 import java.io.IOException;
 import java.util.List;
 
-import org.meta.crawlr.entities.FlickrPhoto;
+import org.n52.flickr.crawlr.entities.FlickrPhoto;
 import org.n52.oxf.OXFException;
 import org.n52.oxf.ows.ExceptionReport;
 import org.slf4j.Logger;

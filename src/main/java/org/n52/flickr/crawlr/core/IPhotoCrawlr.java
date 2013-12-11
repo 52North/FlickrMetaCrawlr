@@ -1,10 +1,10 @@
-package org.meta.crawlr.core;
+package org.n52.flickr.crawlr.core;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-import org.meta.crawlr.entities.FlickrPhoto;
+import org.n52.flickr.crawlr.entities.FlickrPhoto;
 import org.xml.sax.SAXException;
 
 import com.aetrion.flickr.FlickrException;

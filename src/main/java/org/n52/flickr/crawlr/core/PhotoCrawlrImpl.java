@@ -1,4 +1,4 @@
-package org.meta.crawlr.core;
+package org.n52.flickr.crawlr.core;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,7 +9,7 @@ import java.util.Properties;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.meta.crawlr.entities.FlickrPhoto;
+import org.n52.flickr.crawlr.entities.FlickrPhoto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;

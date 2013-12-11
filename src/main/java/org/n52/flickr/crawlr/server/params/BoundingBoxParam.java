@@ -1,4 +1,4 @@
-package org.meta.crawlr.server.params;
+package org.n52.flickr.crawlr.server.params;
 
 /**
  * Class represents a bounding box parameter used in the search query.

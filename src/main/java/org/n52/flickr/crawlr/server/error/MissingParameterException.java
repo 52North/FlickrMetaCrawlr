@@ -1,4 +1,4 @@
-package org.meta.crawlr.server.error;
+package org.n52.flickr.crawlr.server.error;
 
 public class MissingParameterException extends ApplicationException {
 
