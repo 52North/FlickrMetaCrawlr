@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -15,13 +16,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.meta.crawlr.entities.FlickrPhoto;
 import org.n52.oxf.OXFException;
-import org.n52.oxf.adapter.ParameterContainer;
 import org.n52.oxf.ows.ExceptionReport;
-import org.n52.oxf.ows.capabilities.Operation;
-import org.n52.oxf.sos.adapter.ISOSRequestBuilder;
-import org.n52.oxf.sos.adapter.SOSAdapter;
-import org.n52.oxf.sos.adapter.SOSRequestBuilderFactory;
-import org.n52.oxf.sos.adapter.TestSOSAdapter;
 import org.n52.oxf.util.IOHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,13 +44,7 @@ public class SosUploadrImpl {
 	private static final String RESULT = "@RESULT@";
 	
 	
-	public static void main(String[] args) throws Exception {
-		String request = IOHelper.readText(SosUploadrImpl.class.getResourceAsStream("InsertSensorTemplate2.xml"));
-		
-		String response = IOHelper.readText(sendPostMessage(SOS_URL, request));
-		
-		System.out.println(response);
-	}
+	
 	
 	public void uploadPhotos (List<FlickrPhoto> photoList) throws ExceptionReport, OXFException, IOException {
 				
@@ -68,7 +57,7 @@ public class SosUploadrImpl {
 
 		for (FlickrPhoto photo : photoList) {
 			
-			String observationGmlId = photo.getPhotoID();
+			String photoId = "photo-" + photo.getPhotoID();
 			String result = photo.getPhotoURL();
 			Date resultTime = photo.getPhotoDatePosted();
 			Date samplingTime = photo.getPhotoDateTaken();
@@ -78,7 +67,7 @@ public class SosUploadrImpl {
 			String foiDescription = concat(photo.getPhotoTags());
 			String userID = photo.getUserId();
 			
-			replace(insertObservationTemplate, OBSERVATION_GML_ID, observationGmlId);
+			replace(insertObservationTemplate, OBSERVATION_GML_ID, photoId);
 			replace(insertObservationTemplate, OFFERING_ID, offeringID);
 			replace(insertObservationTemplate, PROCEDURE_ID, procedureID);
 			replace(insertObservationTemplate, OBSERVED_PROPERTY, observedProperty);
@@ -91,7 +80,7 @@ public class SosUploadrImpl {
 			String samplingTimeAsISO = df.format(samplingTime);
 			replace(insertObservationTemplate, PHENOMENON_TIME, samplingTimeAsISO);
 			
-			replace(insertObservationTemplate, FOI_ID, "foiID");
+			replace(insertObservationTemplate, FOI_ID, "foi-ID");
 			replace(insertObservationTemplate, FOI_DESCRIPTION, foiDescription);
 			replace(insertObservationTemplate, FOI_LATITUDE, latitude.toString());
 			replace(insertObservationTemplate, FOI_LONGITUDE, longitude.toString());
@@ -102,7 +91,7 @@ public class SosUploadrImpl {
 			
 			
 			// now send to SOS:
-			log.info("sending: " + insertObservationTemplate.toString());
+			log.info("Uploading to SOS: " + insertObservationTemplate.toString());
 			
 			String response = IOHelper.readText(sendPostMessage(SOS_URL, insertObservationTemplate.toString()));
 			
@@ -117,14 +106,14 @@ public class SosUploadrImpl {
 		String result = "";
 		
 		if (collection != null) {
-			String[] array = new String[collection.size()];
+			Object[] array = new Object[0];
 			array = collection.toArray(array);
 			
 			if (array.length >= 1) {
-				result += array[0];
+				result += array[0].toString();
 			}
 			for (int i=1; i<array.length; i++) {
-				result += array[i];
+				result += ", " + array[i].toString();
 			}
 		}
 		return result;
