@@ -21,18 +21,7 @@
                                 <sml:IdentifierList>
                                     <sml:identifier name="uniqueID">
                                         <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:uniqueID">
-                                            <sml:value>http://www.52north.org/sos/procedure/flickr
-											</sml:value>
-                                        </sml:Term>
-                                    </sml:identifier>
-                                    <sml:identifier name="longName">
-                                        <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
-                                            <sml:value>Flickr as an SOS procedure.</sml:value>
-                                        </sml:Term>
-                                    </sml:identifier>
-                                    <sml:identifier name="shortName">
-                                        <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:shortName">
-                                            <sml:value>Flickr procedure</sml:value>
+                                            <sml:value>@PROCEDURE_ID@</sml:value>
                                         </sml:Term>
                                     </sml:identifier>
                                 </sml:IdentifierList>
