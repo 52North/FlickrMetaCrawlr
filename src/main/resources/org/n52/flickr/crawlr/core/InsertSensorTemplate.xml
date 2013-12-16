@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope
+    xmlns:env="http://www.w3.org/2003/05/soap-envelope"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2003/05/soap-envelope http://www.w3.org/2003/05/soap-envelope/soap-envelope.xsd">
+    <env:Body>
+        <swes:InsertSensor service="SOS" version="2.0.0"
+            xmlns:swes="http://www.opengis.net/swes/2.0"
+            xmlns:sos="http://www.opengis.net/sos/2.0"
+            xmlns:swe="http://www.opengis.net/swe/1.0.1"
+            xmlns:sml="http://www.opengis.net/sensorML/1.0.1"
+            xmlns:gml="http://www.opengis.net/gml"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sosInsertSensor.xsd      http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd">
+            <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+            <swes:procedureDescription>
+                <sml:SensorML version="1.0.1">
+                    <sml:member>
+                        <sml:System>
+                            <!-- optional; generated if not present -->
+                            <sml:identification>
+                                <sml:IdentifierList>
+                                    <sml:identifier name="uniqueID">
+                                        <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:uniqueID">
+                                            <sml:value>http://www.52north.org/sos/procedure/flickr
+											</sml:value>
+                                        </sml:Term>
+                                    </sml:identifier>
+                                    <sml:identifier name="longName">
+                                        <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
+                                            <sml:value>Flickr as an SOS procedure.</sml:value>
+                                        </sml:Term>
+                                    </sml:identifier>
+                                    <sml:identifier name="shortName">
+                                        <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:shortName">
+                                            <sml:value>Flickr procedure</sml:value>
+                                        </sml:Term>
+                                    </sml:identifier>
+                                </sml:IdentifierList>
+                            </sml:identification>
+                            <sml:capabilities name="offerings">
+                                <swe:SimpleDataRecord>
+                                    <!-- Field name is used for the offering's name -->
+                                    <swe:field name="Offering for Flickr procedure">
+                                        <swe:Text definition="urn:ogc:def:identifier:OGC:offeringID">
+                                            <swe:value>http://www.52north.org/sos/offering/flickr</swe:value>
+                                        </swe:Text>
+                                    </swe:field>
+                                </swe:SimpleDataRecord>
+                            </sml:capabilities>
+                            <sml:inputs>
+                                <sml:InputList>
+                                    <sml:input name="observable_property_visualObservation">
+                                        <swe:ObservableProperty definition="http://www.52north.org/sos/observableProperty/visualObservation"/>
+                                    </sml:input>
+                                </sml:InputList>
+                            </sml:inputs>
+                            <sml:outputs>
+                                <sml:OutputList>
+                                    <sml:output name="test_observable_property_photo">
+                                        <swe:Category definition="http://www.52north.org/sos/observableProperty/photo">
+                                            <swe:codeSpace xlink:href="NOT_DEFINED"/>
+                                        </swe:Category>
+                                    </sml:output>
+                                </sml:OutputList>
+                            </sml:outputs>
+                        </sml:System>
+                    </sml:member>
+                </sml:SensorML>
+            </swes:procedureDescription>
+            <!-- multiple values possible -->
+            <swes:observableProperty>http://www.52north.org/sos/observableProperty/photo</swes:observableProperty>
+            <swes:metadata>
+                <sos:SosInsertionMetadata>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation</sos:observationType>
+                    <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+                </sos:SosInsertionMetadata>
+            </swes:metadata>
+        </swes:InsertSensor>
+    </env:Body>
+</env:Envelope>
