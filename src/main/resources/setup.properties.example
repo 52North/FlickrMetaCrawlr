@@ -1,3 +1,6 @@
+
+# register at Flickr to get your own API key and fill up: 
+
 apiKey = <your api key>
 secret = <your secret>
 token = <your token>

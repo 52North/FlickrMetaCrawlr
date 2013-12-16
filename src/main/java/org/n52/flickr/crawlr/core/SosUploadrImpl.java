@@ -33,7 +33,7 @@ public class SosUploadrImpl {
 	private static final String INSERT_OBS_TEMPLATE = "InsertObservationTemplate.xml";
 	private static final String INSERT_SENSOR_TEMPLATE = "InsertSensorTemplate.xml";
 	
-	private static final String OFFERING_ID = "@OFFERING-ID@";
+	private static final String OFFERING_ID = "@OFFERING_ID@";
 	private static final String OBSERVATION_GML_ID = "@OBSERVATION_GML_ID@";
 	private static final String PHENOMENON_TIME = "@PHENOMENON_TIME@";
 	private static final String RESULT_TIME = "@RESULT_TIME@";
@@ -47,37 +47,29 @@ public class SosUploadrImpl {
 	private static final String FOI_LATITUDE = "@FOI_LATITUDE@";
 	private static final String RESULT = "@RESULT@";
 	
-	private Map<String, Boolean> procedureIsRegisteredMap;
+	private static final String PROPERTY_HUMAN_VISUAL_PERCEPTION = "http://www.opengis.net/def/property/humanVisualPerception";
+	private static final String OFFERING_PREFIX = "http://www.opengis.net/def/offering/";
 	
 	/**
-	 * constructor.
-	 */
-	public SosUploadrImpl () {
-		procedureIsRegisteredMap = new HashMap<String, Boolean>();
-	}
-	
-	/**
-	 * Calls InsertSensor to register Flickr as a procedure.
-	 *  
+	 * Calls InsertSensor to register procedureID.
 	 * @throws IOException
 	 */
-	public void registerProcedure(String procedureID) throws IOException {
+	public void registerProcedure(String procedureID, String offeringID, String observedProperty) throws IOException {
 		StringBuilder insertSensorTemplate = new StringBuilder(IOHelper.readText(SosUploadrImpl.class.getResourceAsStream(INSERT_SENSOR_TEMPLATE)));
 
 		replace(insertSensorTemplate, PROCEDURE_ID, procedureID);
+		replace(insertSensorTemplate, OFFERING_ID, offeringID);
+		replace(insertSensorTemplate, OBSERVED_PROPERTY, observedProperty);
 		
 		// now send to SOS:
-		log.info("sending InsertSensor to SOS: " + insertSensorTemplate.toString());
+		log.info("Inserting procedure: " + procedureID + " - with offering: " + offeringID);
 		String response = IOHelper.readText(sendPostMessage(SOS_URL, insertSensorTemplate.toString()));
 		log.info(response);
 	}
 	
 	public void uploadPhotos (List<FlickrPhoto> photoList) throws ExceptionReport, OXFException, IOException {
-				
-		// one static procedure / offering
-		final String offeringID  	  = "http://www.52north.org/sos/offering/flickr";
-		final String observedProperty = "http://www.52north.org/sos/observableProperty/photo";
 		
+		String username = "";
 		for (FlickrPhoto photo : photoList) {
 			
 			StringBuilder insertObservationTemplate = new StringBuilder(IOHelper.readText(SosUploadrImpl.class.getResourceAsStream(INSERT_OBS_TEMPLATE)));
@@ -91,6 +83,15 @@ public class SosUploadrImpl {
 			String foiName = photo.getPhotoTitle();
 			String foiDescription = concat(photo.getPhotoTags());
 			String procedureID = "http://www.flickr.com/photos/" + photo.getUserName();
+			String offeringID  = OFFERING_PREFIX + photo.getUserName();
+			String observedProperty = PROPERTY_HUMAN_VISUAL_PERCEPTION;
+			
+			// if procedure has not already been registered through previous photo, then register:
+			if ( ! username.equals(photo.getUserName())) {
+				registerProcedure(procedureID, offeringID, observedProperty);
+				
+				username = photo.getUserName();
+			}
 			
 			replace(insertObservationTemplate, OBSERVATION_GML_ID, photoId + "-observation");
 			replace(insertObservationTemplate, OFFERING_ID, offeringID);
@@ -116,7 +117,7 @@ public class SosUploadrImpl {
 			
 			
 			// now send to SOS:
-			log.info("sensing InsertObservation to SOS: " + insertObservationTemplate.toString());
+			log.info("sending InsertObservation to SOS: " + insertObservationTemplate.toString());
 			
 			String response = IOHelper.readText(sendPostMessage(SOS_URL, insertObservationTemplate.toString()));
 			
@@ -184,4 +185,7 @@ public class SosUploadrImpl {
 
         return response.getEntity().getContent();
     }
+	
+	
+
 }

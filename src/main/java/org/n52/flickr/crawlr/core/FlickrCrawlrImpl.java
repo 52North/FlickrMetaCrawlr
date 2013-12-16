@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.MissingResourceException;
 import java.util.Properties;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -52,6 +53,11 @@ public class FlickrCrawlrImpl implements IFlickrCrawlr {
 		InputStream in = null;
 		try {
 			in = getClass().getResourceAsStream("/setup.properties");
+			
+			if (in == null) {
+				throw new MissingResourceException("Config file 'setup.properties' is missing.", java.util.Properties.class.getName(), "");
+			}
+			
 			Properties properties = new Properties();
 			properties.load(in);
 			apiKey = properties.getProperty("apiKey");

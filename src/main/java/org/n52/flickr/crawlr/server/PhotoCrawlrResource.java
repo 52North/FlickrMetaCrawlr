@@ -64,8 +64,11 @@ public class PhotoCrawlrResource  {
     @GET
 	@Path("/registerSensor")
     @Produces(MediaType.TEXT_HTML)
-    public Response doRegisterSensor() throws IOException {
-    	new SosUploadrImpl().registerProcedure();
+    public Response doRegisterSensor(
+    		@QueryParam("procedure") String procedureID,
+			@QueryParam("offering") String offeringID,
+			@QueryParam("observedProperty") String observedProperty) throws IOException {
+    	new SosUploadrImpl().registerProcedure(procedureID, offeringID, observedProperty);
 		
 		String output = "Procedure registered.";
 		return Response.status(200).entity(output).build();

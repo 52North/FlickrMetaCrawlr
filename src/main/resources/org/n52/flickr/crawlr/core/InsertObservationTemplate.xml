@@ -15,7 +15,7 @@
             xmlns:sf="http://www.opengis.net/sampling/2.0"
             xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sos.xsd            http://www.opengis.net/samplingSpatial/2.0 http://schemas.opengis.net/samplingSpatial/2.0/spatialSamplingFeature.xsd">
             
-            <sos:offering>@OFFERING-ID@</sos:offering>
+            <sos:offering>@OFFERING_ID@</sos:offering>
             <sos:observation>
                 <om:OM_Observation gml:id="@OBSERVATION_GML_ID@">
                     <om:type xlink:href="http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation"/>

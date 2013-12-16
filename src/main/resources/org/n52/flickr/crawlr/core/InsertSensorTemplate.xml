@@ -29,24 +29,17 @@
                             <sml:capabilities name="offerings">
                                 <swe:SimpleDataRecord>
                                     <!-- Field name is used for the offering's name -->
-                                    <swe:field name="Offering for Flickr procedure">
+                                    <swe:field name="offeringID">
                                         <swe:Text definition="urn:ogc:def:identifier:OGC:offeringID">
-                                            <swe:value>http://www.52north.org/sos/offering/flickr</swe:value>
+                                            <swe:value>@OFFERING_ID@</swe:value>
                                         </swe:Text>
                                     </swe:field>
                                 </swe:SimpleDataRecord>
                             </sml:capabilities>
-                            <sml:inputs>
-                                <sml:InputList>
-                                    <sml:input name="observable_property_visualObservation">
-                                        <swe:ObservableProperty definition="http://www.52north.org/sos/observableProperty/visualObservation"/>
-                                    </sml:input>
-                                </sml:InputList>
-                            </sml:inputs>
                             <sml:outputs>
                                 <sml:OutputList>
                                     <sml:output name="test_observable_property_photo">
-                                        <swe:Category definition="http://www.52north.org/sos/observableProperty/photo">
+                                        <swe:Category definition="@OBSERVED_PROPERTY@">
                                             <swe:codeSpace xlink:href="NOT_DEFINED"/>
                                         </swe:Category>
                                     </sml:output>
@@ -56,8 +49,7 @@
                     </sml:member>
                 </sml:SensorML>
             </swes:procedureDescription>
-            <!-- multiple values possible -->
-            <swes:observableProperty>http://www.52north.org/sos/observableProperty/photo</swes:observableProperty>
+            <swes:observableProperty>@OBSERVED_PROPERTY@</swes:observableProperty>
             <swes:metadata>
                 <sos:SosInsertionMetadata>
                     <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation</sos:observationType>
