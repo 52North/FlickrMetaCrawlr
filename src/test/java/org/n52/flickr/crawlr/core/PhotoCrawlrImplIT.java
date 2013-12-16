@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.n52.flickr.crawlr.core.PhotoCrawlrImpl;
+import org.n52.flickr.crawlr.core.FlickrCrawlrImpl;
 import org.n52.flickr.crawlr.entities.FlickrPhoto;
 
 public class PhotoCrawlrImplIT {
@@ -28,7 +28,7 @@ public class PhotoCrawlrImplIT {
 		String[] keywords = new String[] { "Oil" };
 
 		try {
-			List<FlickrPhoto> photos = new PhotoCrawlrImpl()
+			List<FlickrPhoto> photos = new FlickrCrawlrImpl()
 					.crawlForPhotos(minLongitude, minLatitude, maxLongitude,
 							maxLatitude, minTakenDate, maxTakenDate, keywords);
 			

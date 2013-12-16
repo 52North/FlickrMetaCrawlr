@@ -28,7 +28,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.n52.flickr.crawlr.core.PhotoCrawlrImpl;
+import org.n52.flickr.crawlr.core.FlickrCrawlrImpl;
 import org.n52.flickr.crawlr.core.SosUploadrImpl;
 import org.n52.flickr.crawlr.entities.FlickrPhoto;
 import org.n52.flickr.crawlr.server.error.MissingParameterException;
@@ -102,7 +102,7 @@ public class PhotoCrawlrResource  {
     	}
     	Date maxTakenDate = maxTime.getTime().getCalendar().getTime();
     	
-		List<FlickrPhoto> photoList = new PhotoCrawlrImpl().crawlForPhotos(minLongitude, minLatitude, maxLongitude, maxLatitude, minTakenDate, maxTakenDate, keywords.split(","));
+		List<FlickrPhoto> photoList = new FlickrCrawlrImpl().crawlForPhotos(minLongitude, minLatitude, maxLongitude, maxLatitude, minTakenDate, maxTakenDate, keywords.split(","));
 		
 		new SosUploadrImpl().uploadPhotos(photoList);
 		

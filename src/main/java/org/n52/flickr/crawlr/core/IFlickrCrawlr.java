@@ -12,7 +12,7 @@ import com.aetrion.flickr.FlickrException;
 /**
  * @author <a href='mailto:broering@52north.org'>Arne Broering</a>
  */
-public interface IPhotoCrawlr {
+public interface IFlickrCrawlr {
 
 	public List<FlickrPhoto> crawlForPhotos(
 			double minLongitude, double minLatitude, double maxLongitude, double maxLatitude,

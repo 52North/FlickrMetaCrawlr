@@ -28,9 +28,9 @@ import com.aetrion.flickr.photos.PhotosInterface;
 import com.aetrion.flickr.photos.SearchParameters;
 import com.aetrion.flickr.photos.geo.GeoInterface;
 
-public class PhotoCrawlrImpl implements IPhotoCrawlr {
+public class FlickrCrawlrImpl implements IFlickrCrawlr {
 
-	private static final Logger log = LoggerFactory.getLogger(PhotoCrawlrImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(FlickrCrawlrImpl.class);
 
 	/**
 	 * access to the Flickr API.
@@ -40,7 +40,7 @@ public class PhotoCrawlrImpl implements IPhotoCrawlr {
 	private String secret;
 	private String token;
 
-	public PhotoCrawlrImpl() throws IOException, ParserConfigurationException {
+	public FlickrCrawlrImpl() throws IOException, ParserConfigurationException {
 		flickr = initFlickrConnector();
 	}
 
