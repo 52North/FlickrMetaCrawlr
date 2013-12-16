@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.n52.flickr.crawlr.core.FlickrCrawlrImpl;
 import org.n52.flickr.crawlr.entities.FlickrPhoto;
+import org.n52.oxf.valueDomains.time.TimePosition;
 
 public class PhotoCrawlrImplIT {
 
@@ -23,9 +23,9 @@ public class PhotoCrawlrImplIT {
 		double maxLatitude = targetLatitude + 20;
 
 		Date maxTakenDate = new Date(System.currentTimeMillis());
-		Date minTakenDate = calculateDateXWeeksAgo(50);
+		Date minTakenDate = new TimePosition("2008-12-01").getCalendar().getTime();
 
-		String[] keywords = new String[] { "Oil" };
+		String[] keywords = new String[] { "Monterrey,Airport" };
 
 		try {
 			List<FlickrPhoto> photos = new FlickrCrawlrImpl()
@@ -33,8 +33,11 @@ public class PhotoCrawlrImplIT {
 							maxLatitude, minTakenDate, maxTakenDate, keywords);
 			
 			for (FlickrPhoto flickrPhoto : photos) {
-				System.out.println(flickrPhoto);
+				System.out.println(flickrPhoto.toString());
 			}
+			
+			new SosUploadrImpl().uploadPhotos(photos);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -42,11 +45,5 @@ public class PhotoCrawlrImplIT {
 		
 	}
 
-	private Date calculateDateXWeeksAgo(int weeksAgo) {
-		
-		long milliSecondsOfAWeek = 1000 * 60 * 60 * 24 * 7;
-		
-		return new Date(System.currentTimeMillis() - (weeksAgo * milliSecondsOfAWeek));
-	}
 
 }

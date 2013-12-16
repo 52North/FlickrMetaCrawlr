@@ -6,7 +6,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -45,14 +47,25 @@ public class SosUploadrImpl {
 	private static final String FOI_LATITUDE = "@FOI_LATITUDE@";
 	private static final String RESULT = "@RESULT@";
 	
+	private Map<String, Boolean> procedureIsRegisteredMap;
+	
+	/**
+	 * constructor.
+	 */
+	public SosUploadrImpl () {
+		procedureIsRegisteredMap = new HashMap<String, Boolean>();
+	}
+	
 	/**
 	 * Calls InsertSensor to register Flickr as a procedure.
 	 *  
 	 * @throws IOException
 	 */
-	public void registerProcedure() throws IOException {
+	public void registerProcedure(String procedureID) throws IOException {
 		StringBuilder insertSensorTemplate = new StringBuilder(IOHelper.readText(SosUploadrImpl.class.getResourceAsStream(INSERT_SENSOR_TEMPLATE)));
 
+		replace(insertSensorTemplate, PROCEDURE_ID, procedureID);
+		
 		// now send to SOS:
 		log.info("sending InsertSensor to SOS: " + insertSensorTemplate.toString());
 		String response = IOHelper.readText(sendPostMessage(SOS_URL, insertSensorTemplate.toString()));
@@ -63,7 +76,6 @@ public class SosUploadrImpl {
 				
 		// one static procedure / offering
 		final String offeringID  	  = "http://www.52north.org/sos/offering/flickr";
-		final String procedureID 	  = "http://www.52north.org/sos/procedure/flickr";
 		final String observedProperty = "http://www.52north.org/sos/observableProperty/photo";
 		
 		for (FlickrPhoto photo : photoList) {
@@ -78,7 +90,7 @@ public class SosUploadrImpl {
 			Float latitude = photo.getPhotoLatitude();
 			String foiName = photo.getPhotoTitle();
 			String foiDescription = concat(photo.getPhotoTags());
-			String userID = photo.getUserId();
+			String procedureID = "http://www.flickr.com/photos/" + photo.getUserName();
 			
 			replace(insertObservationTemplate, OBSERVATION_GML_ID, photoId + "-observation");
 			replace(insertObservationTemplate, OFFERING_ID, offeringID);
