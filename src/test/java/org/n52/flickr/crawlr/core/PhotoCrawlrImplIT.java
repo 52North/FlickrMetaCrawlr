@@ -1,11 +1,14 @@
 package org.n52.flickr.crawlr.core;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.n52.flickr.crawlr.entities.FlickrPhoto;
+import org.n52.crawlr.entities.Entry;
+import org.n52.crawlr.flickr.FlickrCrawlrImpl;
+import org.n52.crawlr.flickr.SosFlickrUploadrImpl;
 import org.n52.oxf.valueDomains.time.TimePosition;
 
 public class PhotoCrawlrImplIT {
@@ -25,18 +28,20 @@ public class PhotoCrawlrImplIT {
 		Date maxTakenDate = new Date(System.currentTimeMillis());
 		Date minTakenDate = new TimePosition("2008-12-01").getCalendar().getTime();
 
-		String[] keywords = new String[] { "Monterrey,Airport" };
+		List<String> keywords = new ArrayList<String>();
+		keywords.add("Monterrey");
+		keywords.add("Airport");
+		    
 
 		try {
-			List<FlickrPhoto> photos = new FlickrCrawlrImpl()
-					.crawlForPhotos(minLongitude, minLatitude, maxLongitude,
+			List<Entry> photos = new FlickrCrawlrImpl().crawlForEntities(minLongitude, minLatitude, maxLongitude,
 							maxLatitude, minTakenDate, maxTakenDate, keywords);
 			
-			for (FlickrPhoto flickrPhoto : photos) {
+			for (Entry flickrPhoto : photos) {
 				System.out.println(flickrPhoto.toString());
 			}
 			
-			new SosUploadrImpl().uploadPhotos(photos);
+			new SosFlickrUploadrImpl().uploadEntries(photos, keywords);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

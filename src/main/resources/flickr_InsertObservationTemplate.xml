@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope
+    xmlns:env="http://www.w3.org/2003/05/soap-envelope"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2003/05/soap-envelope http://www.w3.org/2003/05/soap-envelope/soap-envelope.xsd">
+    <env:Body>
+        <sos:InsertObservation service="SOS" version="2.0.0"
+            xmlns:sos="http://www.opengis.net/sos/2.0"
+            xmlns:swes="http://www.opengis.net/swes/2.0"
+            xmlns:swe="http://www.opengis.net/swe/2.0"
+            xmlns:sml="http://www.opengis.net/sensorML/1.0.1"
+            xmlns:gml="http://www.opengis.net/gml/3.2"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:om="http://www.opengis.net/om/2.0"
+            xmlns:sams="http://www.opengis.net/samplingSpatial/2.0"
+            xmlns:sf="http://www.opengis.net/sampling/2.0"
+            xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sos.xsd            http://www.opengis.net/samplingSpatial/2.0 http://schemas.opengis.net/samplingSpatial/2.0/spatialSamplingFeature.xsd">
+            
+            <sos:offering>@OFFERING_ID@</sos:offering>
+            <sos:observation>
+                <om:OM_Observation gml:id="@OBSERVATION_GML_ID@">
+                    <gml:description>@OBSERVATION_DESCRIPTION@</gml:description>
+                    <om:type xlink:href="http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation"/>
+                    <om:phenomenonTime>
+                        <gml:TimeInstant gml:id="phenomenonTime">
+                            <gml:timePosition>@PHENOMENON_TIME@</gml:timePosition>
+                        </gml:TimeInstant>
+                    </om:phenomenonTime>
+                    <om:resultTime>
+                        <gml:TimeInstant gml:id="resultTime">
+                            <gml:timePosition>@RESULT_TIME@</gml:timePosition>
+                        </gml:TimeInstant>
+                    </om:resultTime>
+                    <om:procedure xlink:href="@PROCEDURE_ID@"/>
+                    <om:observedProperty xlink:href="@OBSERVED_PROPERTY@"/>
+                    <om:featureOfInterest>
+                        <sams:SF_SpatialSamplingFeature gml:id="ssf_test_feature">
+                            <gml:identifier codeSpace="">@FOI_ID@</gml:identifier>
+                            <gml:name>@FOI_NAME@</gml:name>                           
+                            <sf:type xlink:href="http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint"/>
+                            <sf:sampledFeature xlink:href="http://www.52north.org/sos/featureOfInterest/world"/>
+                            <sams:shape>
+                                <gml:Point gml:id="@FOI_POINT_ID@">
+                                    <gml:pos srsName="http://www.opengis.net/def/crs/EPSG/0/4326">@FOI_LONGITUDE@ @FOI_LATITUDE@</gml:pos>
+                                </gml:Point>
+                            </sams:shape>
+                        </sams:SF_SpatialSamplingFeature>
+                    </om:featureOfInterest>
+                    <om:result xsi:type="gml:ReferenceType" xlink:href="@RESULT@"/>
+                </om:OM_Observation>
+            </sos:observation>
+        </sos:InsertObservation>
+    </env:Body>
+</env:Envelope>

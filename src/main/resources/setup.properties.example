@@ -1,6 +1,16 @@
 
 # register at Flickr to get your own API key and fill up: 
 
-apiKey = <your api key>
-secret = <your secret>
-token = <your token>
+flickr.apiKey = 
+flickr.secret = 
+flickr.token = 
+
+# register at Twitter to get your own API key and fill up: 
+
+twitter.consumerKey = 
+twitter.consumerSecret = 
+twitter.token = 
+twitter.tokenSecret = 
+
+# crawlr settings
+sos.url = http://ows.dev.52north.org:8080/52n-wfs-webapp/sos

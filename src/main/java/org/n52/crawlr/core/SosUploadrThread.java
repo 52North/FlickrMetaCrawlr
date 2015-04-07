@@ -1,9 +1,9 @@
-package org.n52.flickr.crawlr.core;
+package org.n52.crawlr.core;
 
 import java.io.IOException;
 import java.util.List;
 
-import org.n52.flickr.crawlr.entities.FlickrPhoto;
+import org.n52.crawlr.entities.Entry;
 import org.n52.oxf.OXFException;
 import org.n52.oxf.ows.ExceptionReport;
 import org.slf4j.Logger;
@@ -13,19 +13,21 @@ public class SosUploadrThread implements Runnable {
 
 	private static final Logger log = LoggerFactory.getLogger(SosUploadrThread.class);
 	
-	private List<FlickrPhoto> photoList;
+	private List<Entry> entryList;
+	private List<String> keywords;
+	private SosUploadr sosUploadr;
 	
-	public SosUploadrThread (List<FlickrPhoto> photoList) {
-		this.photoList = photoList;
+	public SosUploadrThread (List<Entry> entryList, List<String> keywords, SosUploadr sosUploadr) {
+		this.entryList = entryList;
+		this.keywords = keywords;
+		this.sosUploadr = sosUploadr;
 	}
 	
 	@Override
 	public void run() {
-		SosUploadrImpl sosUploadr = new SosUploadrImpl();
+	    if (sosUploadr != null) {
 		try {
-			
-			sosUploadr.uploadPhotos(photoList);
-			
+			sosUploadr.uploadEntries(entryList, keywords);
 		} catch (ExceptionReport e) {
 			log.error(e.getLocalizedMessage());
 			e.printStackTrace();
@@ -36,6 +38,7 @@ public class SosUploadrThread implements Runnable {
 			log.error(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
+	    }
 	}
 
 }

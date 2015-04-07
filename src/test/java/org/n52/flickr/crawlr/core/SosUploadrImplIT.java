@@ -2,12 +2,14 @@ package org.n52.flickr.crawlr.core;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
-import org.n52.flickr.crawlr.core.SosUploadrImpl;
-import org.n52.flickr.crawlr.entities.FlickrPhoto;
+import org.n52.crawlr.core.SosUploadr;
+import org.n52.crawlr.entities.Entry;
+import org.n52.crawlr.flickr.SosFlickrUploadrImpl;
 
 
 public class SosUploadrImplIT {
@@ -17,32 +19,32 @@ public class SosUploadrImplIT {
 		
 		// create fake FlickrPhotos:
 		
-		FlickrPhoto flickrPhoto = new FlickrPhoto();
+		Entry flickrPhoto = new Entry();
 		flickrPhoto.setAccuracy(0);
-		flickrPhoto.setPhotoDatePosted(new Date());
-		flickrPhoto.setPhotoDateTaken(new Date());
-		flickrPhoto.setPhotoDescription("my photo decription");
-		flickrPhoto.setPhotoID("my-photo-ID");
-		flickrPhoto.setPhotoLatitude(52);
-		flickrPhoto.setPhotoLongitude(7);
+		flickrPhoto.setDatePosted(new Date());
+		flickrPhoto.setDateTaken(new Date());
+		flickrPhoto.setDescription("my photo decription");
+		flickrPhoto.setID("my-photo-ID");
+		flickrPhoto.setLatitude(52);
+		flickrPhoto.setLongitude(7);
 		
 		Collection<String> photoTags = new ArrayList<String>();
 		photoTags.add("my Tag");
-		flickrPhoto.setPhotoTags(photoTags);
+		flickrPhoto.setTags(photoTags);
 		
-		flickrPhoto.setPhotoTitle("my photo title");
-		flickrPhoto.setPhotoURL("http://myPhotoUrl");
+		flickrPhoto.setTitle("my photo title");
+		flickrPhoto.setValue("http://myPhotoUrl");
 		flickrPhoto.setUserId("my-user-ID");
 		flickrPhoto.setUserName("my user name");
 		
-		List<FlickrPhoto> photoList = new ArrayList<FlickrPhoto>();
+		List<Entry> photoList = new ArrayList<Entry>();
 		photoList.add(flickrPhoto);
 		
 		// start testing the uploading:
-		SosUploadrImpl sosUploadr = new SosUploadrImpl();
+		SosUploadr sosUploadr = new SosFlickrUploadrImpl();
 		try {
 			
-			sosUploadr.uploadPhotos(photoList);
+			sosUploadr.uploadEntries(photoList, new ArrayList<String>(0));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,16 +57,16 @@ public class SosUploadrImplIT {
 		
 		// create fake FlickrPhotos:
 		
-		FlickrPhoto flickrPhoto = new FlickrPhoto();
+		Entry flickrPhoto = new Entry();
 		
-		List<FlickrPhoto> photoList = new ArrayList<FlickrPhoto>();
+		List<Entry> photoList = new ArrayList<Entry>();
 		photoList.add(flickrPhoto);
 		
 		// start testing the uploading:
-		SosUploadrImpl sosUploadr = new SosUploadrImpl();
+		SosUploadr sosUploadr = new SosFlickrUploadrImpl();
 		try {
 			
-			sosUploadr.uploadPhotos(photoList);
+			sosUploadr.uploadEntries(photoList, new ArrayList<String>(0));
 			
 		} catch (Exception e) {
 			e.printStackTrace();

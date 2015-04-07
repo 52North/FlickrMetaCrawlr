@@ -18,7 +18,8 @@
             <sos:offering>@OFFERING_ID@</sos:offering>
             <sos:observation>
                 <om:OM_Observation gml:id="@OBSERVATION_GML_ID@">
-                    <om:type xlink:href="http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation"/>
+                	<gml:description>@OBSERVATION_DESCRIPTION@</gml:description>
+                    <om:type xlink:href="http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TextObservation"/>
                     <om:phenomenonTime>
                         <gml:TimeInstant gml:id="phenomenonTime">
                             <gml:timePosition>@PHENOMENON_TIME@</gml:timePosition>
@@ -33,7 +34,6 @@
                     <om:observedProperty xlink:href="@OBSERVED_PROPERTY@"/>
                     <om:featureOfInterest>
                         <sams:SF_SpatialSamplingFeature gml:id="ssf_test_feature">
-                            <gml:description>@FOI_DESCRIPTION@</gml:description>
                             <gml:identifier codeSpace="">@FOI_ID@</gml:identifier>
                             <gml:name>@FOI_NAME@</gml:name>                           
                             <sf:type xlink:href="http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint"/>
@@ -45,7 +45,7 @@
                             </sams:shape>
                         </sams:SF_SpatialSamplingFeature>
                     </om:featureOfInterest>
-                    <om:result xsi:type="gml:ReferenceType" xlink:href="@RESULT@"/>
+                    <om:result xsi:type="xs:string">@RESULT@</om:result>
                 </om:OM_Observation>
             </sos:observation>
         </sos:InsertObservation>

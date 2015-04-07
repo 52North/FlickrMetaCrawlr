@@ -1,6 +1,5 @@
-package org.n52.flickr.crawlr.server.params;
+package org.n52.crawlr.server.params;
 
-import org.n52.oxf.ows.capabilities.ITime;
 import org.n52.oxf.valueDomains.time.ITimePosition;
 import org.n52.oxf.valueDomains.time.TimeFactory;
 import org.n52.oxf.valueDomains.time.TimePosition;
